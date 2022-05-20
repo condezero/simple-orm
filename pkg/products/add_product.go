@@ -6,12 +6,25 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// swagger:model
 type AddProductRequestBody struct {
-	Name  string `json:"name"`
-	Stock int32  `json:"stock"`
-	Price int32  `json:"price"`
+	// Name of the product
+	Name string `json:"name"`
+	// Stock of the product
+	Stock int32 `json:"stock"`
+	// Price of the product
+	Price int32 `json:"price"`
 }
 
+// AddProducts godoc
+// @Summary Add Products.
+// @Description Adds the product to db.
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param AddProductRequestBody body AddProductRequestBody true "Product"
+// @Success 200 {object} models.Product
+// @Router /products [post]
 func (h handler) AddProduct(c *fiber.Ctx) error {
 	body := AddProductRequestBody{}
 

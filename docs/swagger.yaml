@@ -1,4 +1,44 @@
 basePath: /
+definitions:
+  models.Product:
+    properties:
+      id:
+        description: the id of the product
+        type: integer
+      name:
+        description: the name of the product
+        type: string
+      price:
+        description: the price of the product
+        type: integer
+      stock:
+        description: the stock of the product
+        type: integer
+    type: object
+  products.AddProductRequestBody:
+    properties:
+      name:
+        description: Name of the product
+        type: string
+      price:
+        description: Price of the product
+        type: integer
+      stock:
+        description: Stock of the product
+        type: integer
+    type: object
+  products.UpdateProductRequestBody:
+    properties:
+      name:
+        description: Name of the product
+        type: string
+      price:
+        description: Price of the product
+        type: integer
+      stock:
+        description: Stock of the product
+        type: integer
+    type: object
 host: localhost:3000
 info:
   contact: {}
@@ -26,6 +66,109 @@ paths:
       summary: Show the status of server.
       tags:
       - root
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Get all products from db.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Product'
+            type: array
+      summary: Get all Products.
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: Adds the product to db.
+      parameters:
+      - description: Product
+        in: body
+        name: AddProductRequestBody
+        required: true
+        schema:
+          $ref: '#/definitions/products.AddProductRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Add Products.
+      tags:
+      - products
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove a product from db.
+      parameters:
+      - description: Product Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Remove Products.
+      tags:
+      - products
+    get:
+      consumes:
+      - application/json
+      description: Get a product from db.
+      parameters:
+      - description: Product Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Get a Product.
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: Update a product.
+      parameters:
+      - description: Product
+        in: body
+        name: UpdateProductRequestBody
+        required: true
+        schema:
+          $ref: '#/definitions/products.UpdateProductRequestBody'
+      - description: Product Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+      summary: Update Products.
+      tags:
+      - products
 schemes:
 - http
 swagger: "2.0"

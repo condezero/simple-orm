@@ -4,7 +4,7 @@
 
 *Start app*
 
-> docker-compose --env-file ./.env up -d
+> docker-compose up -d
 
 *Stop app*
 

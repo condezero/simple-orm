@@ -6,6 +6,15 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetProduct godoc
+// @Summary Get a Product.
+// @Description Get a product from db.
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param id path int true "Product Id"
+// @Success 200 {object} models.Product
+// @Router /products/{id} [get]
 func (h handler) GetProduct(c *fiber.Ctx) error {
 	id := c.Params("id")
 
